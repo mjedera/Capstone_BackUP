@@ -1,0 +1,379 @@
+<div class="card-table vessel-card">
+  <div class="table-header">
+    <h3>Personal Information of an Apprehended Suspect</h3>
+      <div class="form-actions full-width" style="display:flex; gap:10px; justify-content:flex-end; margin-left: auto;">
+        <button type="button" class="btn btn-secondary" id="cancelApprehensionForm">
+          Cancel
+        </button>
+      </div>
+  </div>
+
+  <form id="apprehensionForm" class="two-column-form" novalidate>
+
+    <!-- Applicant Info -->
+    <label>Violator No.
+      <input type="text" id="violatorNo" name="violatorNo" class="form-control" readonly>
+    </label>
+
+    <label >Time & Date Apprehension
+    <input type="datetime-local"
+            id="apprehensionDate"
+            name="apprehensionDate"
+            class="form-control"
+            required
+            >
+    </label>
+
+    <label>Full Name
+      <input type="text" id="fullName" name="fullName" class="form-control" minlength="3" required>
+    </label>
+
+    <label>Address
+      <input type="text" id="address" name="address" class="form-control" minlength="3" required>
+    </label>
+
+    <label>Age
+      <input type="text" id="age" name="age" class="form-control" min="1" max="120" required>
+    </label>
+
+    <label>Sex
+      <select id="sex" name="sex" class="form-select" required>
+        <option value="" selected>-- Select Sex --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+
+
+    <label>Birthdate
+      <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+    </label>
+
+
+    <!-- Vessel Type -->
+    <fieldset class="full-width">
+      <legend>Fishing Vessel Used</legend>
+      <div class="checkbox-group">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="motorized" name="vesselType" value="Motorized"> Motorized
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="nonMotorized" name="vesselType" value="Non-Motorized"> Non-Motorized
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="none" name="vesselType" value="None"> None
+        </label>
+      </div>
+    </fieldset>
+    <br>
+
+    <!-- Gear Type -->
+    <fieldset class="full-width">
+      <legend>Fishing Gear Used</legend>
+      <div class="checkbox-group">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="yesGear" name="gearType" value="Yes"> Yes
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="noneGear" name="gearType" value="None"> None
+        </label>
+      </div>
+    </fieldset>
+
+    <label>Place of Apprehension
+      <input type="text" id="placeOfApprehension" name="placeOfApprehension" class="form-control" required>
+    </label>
+        <br>
+
+<div id="vesselSection" class="full-width">
+    <div class="gear-grid">
+  <!-- ALL vessel dimension inputs -->
+    <!-- Dimensions -->
+    <div class="table-header">
+        <h3>Fishing Vessel</h3>
+    </div>
+    <h4 class="section-title full-width">Fishing Vessel No.
+      <div class="search-filter-row">
+      <div class="search-container">
+        <i class="fa fa-search search-icon"></i>
+        <input type="hidden" id="selectedVesselId" name="selectedVesselId">
+        <input
+          type="text"
+          id="vesselSearchInput"
+          class="form-control"
+          placeholder="Search vessel name or no..."
+        >
+      </div>
+    </div>
+    </h4>
+    <h4 class="section-title full-width">Fishing Vessel Dimensions and Tonnages</h4>
+
+    <label>Length (m)
+      <input type="number" step="0.01" id="length" name="length" class="form-control" required>
+    </label>
+
+    <label>Breadth (m)
+      <input type="number" step="0.01" id="breadth" name="breadth" class="form-control" required>
+    </label>
+
+    <label>Depth (m)
+      <input type="number" step="0.01" id="depth" name="depth" class="form-control" required>
+    </label>
+
+    <label>Gross Tonnage
+      <input type="number" id="grossTonnage" name="grossTonnage" class="form-control" step="any" required>
+    </label>
+
+    <label>Net Tonnage
+      <input type="number" id="netTonnage" name="netTonnage" class="form-control" step="any" required>
+    </label>
+
+    <label>Vessel Color
+      <input type="text" id="vesselColor" name="vesselColor" class="form-control" required>
+    </label>
+    </div>
+    </div>
+    <div id="propulsionSectionWrapper" class="full-width">
+      <div class="gear-grid">
+    <!-- Engine Info -->
+    <h4 class="section-title full-width" id="propulsionSection">Particulars of Propulsion System</h4>
+
+    <label>Engine Make
+      <input type="text" id="engineMake" name="engineMake" class="form-control" required>
+    </label>
+
+    <label>Serial Number
+      <input type="text" id="engineSerialNumber" name="engineSerialNumber" class="form-control" required>
+    </label>
+
+    <label>Horse Power
+      <input type="number"
+       id="horsePower"
+       name="horsePower"
+       class="form-control"
+       step="any" required>
+    </label>
+
+    <label>No. of Cylinders
+      <input type="number" id="cylinders" name="cylinders" class="form-control" required>
+    </label>
+  </div>
+  </div>
+    <!-- -------------------------------------- -->
+    <!-- --- fishing gears section--------- -->
+    <!-- ------------------------------------- -->
+<div id="gearSection" class="full-width" style="display:none;">
+  <div class="gear-grid">
+  <div class="table-header">
+    <h3>Fishing Gears</h3>
+  </div>
+    <!-- SEARCH -->
+    <h4 class="section-title full-width">Gear No.</h4>
+    <div class="search-filter-row full-width">
+      <div class="search-container">
+        <i class="fa fa-search search-icon"></i>
+        <input type="hidden" id="selectedGearId" name="selectedGearId">
+        <input type="hidden" id="registeredGearNo" name="registeredGearNo">
+        <input
+          type="text"
+          id="gearSearchInput"
+          class="form-control"
+          placeholder="Search gear no..."
+        >
+      </div>
+    </div>
+
+    <!-- HAND INSTRUMENTS -->
+    <h4 class="section-title full-width">Hand Instruments</h4>
+
+    <label>Speargun
+      <input type="number" id="spear_gun" name="speargun" min="0" class="form-control">
+    </label>
+
+    <label>Scoop / Dip Nets (Bolinao, Anchovies)
+      <input type="number" id="scoop_dip_net" name="scoopNet" min="0" class="form-control">
+    </label>
+
+    <label>Gaff Hook
+      <input type="number" id="gaff_hook" name="gaffHook" min="0" class="form-control">
+    </label>
+
+    <label>Spears (Sapang)
+      <input type="number" id="spears" name="spears" min="0" class="form-control">
+    </label>
+
+    <!-- LINES -->
+    <h4 class="section-title full-width">Lines</h4>
+
+    <label>Long line (palangre) 500 hooks
+      <input type="number" id="longLine500" name="longLine500" min="0" class="form-control">
+    </label>
+
+    <label>Long line (palangre) 501 hooks +
+      <input type="number" id="longLine500plus" name="longLine500plus" min="0" class="form-control">
+    </label>
+
+    <!-- PALUBOG NETS -->
+    <h4 class="section-title full-width">Palubog Nets</h4>
+
+    <label>Pang-ilak
+      <input type="number" id="pang_ilak" name="pang_ilak" min="0" class="form-control">
+    </label>
+
+    <label>Panglonggot (Mabgas/Bolinao)
+      <input type="number" id="panglonggot" name="panglonggot" min="0" class="form-control">
+    </label>
+
+    <label>Pang-mangodlong
+      <input type="number" id="pang_mangodlong" name="pang_mangodlong" min="0" class="form-control">
+    </label>
+
+    <label>Panghawol-hawol
+      <input type="number" id="panghawol_hawol" name="panghawol_hawol" min="0" class="form-control">
+    </label>
+
+    <label>Pangmangsi
+      <input type="number" id="pangmangsi" name="pangmangsi" min="0" class="form-control">
+    </label>
+
+    <!-- NETS -->
+    <h4 class="section-title full-width">Nets</h4>
+
+    <label>Bungsod
+      <input type="number" id="bungsod" name="bungsod" min="0" class="form-control">
+    </label>
+
+    <label>Palutaw Nets
+      <input type="number" id="palutawNets" name="palutawNets" min="0" class="form-control">
+    </label>
+
+    <label>Palaran
+      <input type="number" id="palaran" name="palaran" min="0" class="form-control">
+    </label>
+
+    <label>Pamawo (no scaring device)
+      <input type="number" id="pamawo" name="pamawo" min="0" class="form-control">
+    </label>
+
+    <!-- TRAPS -->
+    <h4 class="section-title full-width">Traps</h4>
+
+    <label>Bobo Small (3ft)
+      <input type="number" id="boboSmallQty" name="boboSmallQty" min="0" class="form-control">
+    </label>
+
+    <label>Bobo (>3ft)
+      <input type="number" id="boboLargeQty" name="boboLargeQty" min="0" class="form-control">
+    </label>
+
+    <label>Tambuan
+      <input type="number" id="tambuanQty" name="tambuanQty" min="0" class="form-control">
+    </label>
+
+    <!-- ACCESSORIES -->
+    <h4 class="section-title full-width">Accessories</h4>
+
+    <label>Accessories
+      <select name="accessories" class="form-select">
+        <option value="">-- Select Accessory --</option>
+        <option value="pressure_light">Pressure light (Petromax)</option>
+        <option value="25_watts_below">25 watts below</option>
+        <option value="26_50_watts">26–50 watts</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+    <!-- bantay dagat list -->
+    <h4 class="section-title full-width">Municipal Fishery Law Enforcement Team(Present)</h4>
+
+    <label>No. Of Bantay Dagat Present
+      <input type="text" id="mfletCount" name="mfletCount" class="form-control">
+    </label>
+    <br>
+
+    <!-- violation section -->
+    <h4 class="section-title full-width">Violation as per Municipal Ordinance No.292-36</h4>
+
+    <label>Type of Violation</label>
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="openViolationModal"
+    >
+      Select Violations
+    </button>
+
+    <input type="hidden" id="selectedViolations" name="violationType">
+    <input type="hidden" id="selectedOrdinanceIds" name="ordinanceIds">
+
+    <label>Penalty Fee
+      <input
+        type="text"
+        id="penaltyDetails"
+        name="penaltyDetails"
+        class="form-control"
+        readonly
+      >
+    </label>
+    <label>No. of days for community service
+      <input type="text" id="noOfDays" name="noOfDays" class="form-control" >
+    </label>
+
+    <button type="submit" class="btn btn-primary full-width" style="margin-top:15px;">
+      Save
+    </button>
+
+  </form>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">
+          Apprehension report saved successfully.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="violationModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Select Violations</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- SEARCH -->
+        <input
+          type="text"
+          id="ordinanceSearch"
+          class="form-control mb-3"
+          placeholder="Search ordinance..."
+        >
+
+        <!-- LIST -->
+        <div id="ordinanceList" class="row g-2"></div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button class="btn btn-primary" id="applyViolations">
+          Apply Violations
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,28 @@
+<div class="settings-page">
+      <div class="card">
+        <h1>Admin Settings</h1>
+        <p class="lead">Change site logo, create new admin accounts, or change the current admin password.</p>
+      </div>
+
+      <!-- Change Logo -->
+      <div class="card" id="logoCard">
+        <h2 style="margin:0 0 8px;font-size:16px">Change Logo</h2>
+        <p class="helper">Upload a new logo file. Supported: PNG, JPG, SVG. Max size: 2MB.</p>
+        <div class="grid">
+          <div>
+            <label for="logoFile">Choose logo</label>
+            <input type="file" id="logoFile" accept="image/*">
+            <div class="helper">Preview:</div>
+            <img id="logoPreview" class="preview" alt="logo preview" src="data:;base64,iVBORw0KGgo=">
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <div class="row">
+              <button id="uploadLogoBtn" name="uploadLogo" class="btn">Upload Logo</button>
+              <button id="removeLogoBtn" class="btn ghost">Remove</button>
+            </div>
+            <div id="logoMsg" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+</div>

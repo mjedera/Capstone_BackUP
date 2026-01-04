@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fisherfolk Hub — Bantay Dagat</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <div class="header-illustration">
+      <div class="sun"></div>
+      <img src="/images/boat.png" alt="Boat" class="boat">
+      </div>
+
+      <header class="login-card-header">
+        <h1>Fisherfolk Digital Hub</h1>
+        <p class="muted">Sign in to continue</p>
+      </header>
+
+     <form action="/api/bantay-dagat/BantayDagatLogin" method="POST" class="login-form">
+
+        <div class="login-form-row">
+          <label >Email or Mobile</label>
+          <input  id="username" type="text" name="username" required />
+          
+        </div>
+
+        <div class="login-form-row">
+          <label>Password</label>
+          <div class="login-pw-wrap">
+            <input id="password" name="password" type="password" required />
+          </div>
+          <div class="login-error" ></div>
+        </div>
+        <button class="login-btn primary" type="submit">Sign in</button>
+        <div class="login-server-message" ></div>
+        
+      </form>
+    </section>
+  </main>
+
+  
+  <div class="login-image" id="fisherimageS">
+    <img src="/images/fisherfolk_no_background.png">
+  </div>
+  </div>
+</body>
+</html>

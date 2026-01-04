@@ -1,0 +1,147 @@
+<div class="card-table ">
+    <div class="table-header">
+        <h3 >Fishing Gears Registration</h3>
+        <div class="form-actions full-width" style="display:flex; gap:10px; justify-content:flex-end; margin-left: auto;">
+        <button type="button" class="btn btn-danger" id="cancelGearsRegistrationForm">
+          Close
+        </button>
+      </div>
+    </div>
+    <form id="gearForm" class="two-column-form">
+    <input type="hidden" id="gearApplicantId" name="applicant_id" readonly>
+      <label>Gear No.
+        <input type="text" id="gearNo" name="gear_no" class="form-control" readonly>
+      </label>
+
+      <label>Application Date
+        <input type="date" id="registrationDate" name="application_date" class="form-control" >
+      </label>
+
+      <label>Name of Owner
+        <input type="text" id="ownerName" name="ownerName" class="form-control" readonly>
+      </label>
+
+      <label>Owner Address
+        <input type="text" id="ownerAddress" name="ownerAddress" class="form-control" readonly>
+      </label>
+    <!-- --------------------------------------------- -->
+    <!-- HAND INSTRUMENTS -->
+    <!-- --------------------------------------------- -->
+    <h4 class="section-title full-width">Hand Instruments</h4>
+
+    <label>Speargun
+      <input type="number" id="spear_gun" name="speargun" min="0" class="form-control">  
+    </label>
+
+    <label>Scoop/Dip Nets (Bolinao, Anchovies)
+      <input type="number" id="scoop_dip_net" name="scoopNet" min="0" class="form-control">
+    </label>
+
+    <label>Gaff Hook
+      <input type="number" id="gaff_hook" name="gaffHook" min="0" class="form-control">
+    </label>
+
+    <label>Spears (Sapang)
+      <input type="number" id="spears" name="spears" min="0" class="form-control">
+    </label>
+
+    <!-- --------------------------------------------- -->
+    <!-- LINES -->
+    <!-- --------------------------------------------- -->
+    <h4 class="section-title full-width">Lines</h4>
+
+    <label>Long line (palangre) 500 hooks
+      <input type="number" id="longLine500" name="longLine500" min="0" class="form-control">
+    </label>
+
+    <label>Long line (palangre) 501 hooks+
+      <input type="number" id="longLine500plus" name="longLine500plus" min="0" class="form-control">
+    </label>
+
+    <!-- --------------------------------------------- -->
+    <!-- PALUBOG NETS -->
+    <!-- --------------------------------------------- -->
+    <h4 class="section-title full-width">Palubog Nets</h4>
+
+    <label>Pang-ilak
+      <input type="number" id="pang_ilak" name="pang_ilak" min="0" class="form-control">
+    </label>
+
+    <label>Panglonggot (Mabgas/Bolinao)
+      <input type="number" id="panglonggot" name="panglonggot" min="0" class="form-control">
+    </label>
+
+    <label>Pang-mangodlong
+      <input type="number" id="pang_mangodlong" name="pang_mangodlong" min="0" class="form-control">
+    </label>
+
+    <label>Panghawol-hawol
+      <input type="number" id="panghawol_hawol" name="panghawol_hawol" min="0" class="form-control">
+    </label>
+
+    <label>Pangmangsi
+      <input type="number" id="pangmangsi" name="pangmangsi" min="0" class="form-control">
+    </label>
+
+    <!-- --------------------------------------------- -->
+    <!-- NETS -->
+    <!-- --------------------------------------------- -->
+    <h4 class="section-title full-width">Nets</h4>
+
+    <label>Bungsod
+      <input type="number" id="bungsod" name="bungsod" min="0" class="form-control">
+    </label>
+
+    <label>Palutaw nets
+      <input type="number" id="palutawNets" name="palutawNets" min="0" class="form-control">
+    </label>
+
+    <label>Palaran
+      <input type="number" id="palaran" name="palaran" min="0" class="form-control">
+    </label>
+
+    <label>Pamawo (no scaring device)
+      <input type="number" id="pamawo" name="pamawo" min="0" class="form-control">
+    </label>
+
+    <!-- --------------------------------------------- -->
+    <!-- TRAPS / BOBO -->
+    <!-- --------------------------------------------- -->
+    <h4 class="section-title full-width">Traps</h4>
+
+    <label>Bobo Small (3ft)
+      <input type="number" name="boboSmallQty" id="boboSmallQty" min="0" class="form-control">
+    </label>
+
+    <label>Bobo (>3ft)
+      <input type="number" name="boboLargeQty" id="boboLargeQty" min="0" class="form-control">
+    </label>
+
+    <label>Tambuan
+      <input type="number" name="tambuanQty" id="tambuanQty" min="0" class="form-control">
+    </label>
+
+    <!-- Accessories -->
+     <h4 class="section-title full-width">Accessories</h4>
+      <label>Accessories
+      <select id="accessories" name="accessories" class="form-select">
+        <option value=""  selected>-- Select Accessory --</option>
+        <option value="pressure_light">Pressure light (Petromax)</option>
+        <option value="25_watts_below">25 watts below</option>
+        <option value="26_50_watts">26–50 watts</option>
+      </select>
+      </label>
+
+   
+      <h4 class="section-title full-width">Payment</h4>
+      <label>Registration Fee (₱)
+        <input type="text" id="registrationFee" name="registrationFee" class="form-control" readonly>
+      </label>
+
+      <button id="saveGearBtn" type="submit" class="btn-primary full-width" disabled style="margin-top:15px;color: #fff;" >
+        Save
+      </button>
+
+
+  </form>
+</div>

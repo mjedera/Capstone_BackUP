@@ -1,0 +1,140 @@
+<div class="card profile-card">
+    <div class="banner">
+        <div class="title">
+            <h3>FISHERFOLK DIGITAL HUB</h3>
+            <p>Transaction and monitoring system</p>
+        </div>
+        <img id="applicantPhoto" src="" alt="Applicant Photo" class="profile-logo"/>
+    </div>
+
+    <div class="profile-body">
+        <div class="info-wrapper">
+            <div class="info-text">
+                <h5 id="profile-name"></h5>
+                <small id="profile-username"></small>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" style="display:none;">
+            <button class="upload-btn" id="uploadBtn" type="button">
+                <i class="bi bi-upload"></i>
+                <span>Upload new photo</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="cards-row">
+    <div class="info-card">
+        <div class="card-header">About</div>
+
+        <div class="info-list">
+            <div class="info-item">
+                <i class="bi bi-person"></i>
+                <div>
+                    <span class="label">Full Name:</span>
+                    <span class="value" id="full-name"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-gender-male"></i>
+                <div>
+                    <span class="label">Age:</span>
+                    <span class="value" id="age"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-book"></i>
+                <div>
+                    <span class="label">Sex:</span>
+                    <span class="value" id="sex"></span>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="bi bi-gift"></i>
+                <div>
+                    <span class="label">Birthday:</span>
+                    <span class="value" id="birthday"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-geo-alt"></i>
+                <div>
+                    <span class="label">Address:</span>
+                    <span class="value" id="address"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-telephone"></i>
+                <div>
+                    <span class="label">Status:</span>
+                    <span class="value" id="marital-status"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-envelope"></i>
+                <div>
+                    <span class="label">Applicant-type:</span>
+                    <span class="value" id="applicant-type"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer-handle">⋯</div>
+    </div>
+
+    <div class="info-card">
+    <div class="card-header">Other Information</div>
+
+    <div class="info-list">
+        <!-- Registered Vessels -->
+        <div class="info-item">
+        <i class="bi bi-boat"></i>
+        <div>
+            <span class="label">Registered Vessels:</span>
+            <div id="registered-vessels" class="value"></div>
+        </div>
+        </div>
+
+        <!-- Registered Fishing Gears -->
+        <div class="info-item">
+        <i class="bi bi-tools"></i>
+        <div>
+            <span class="label">Fishing Gears:</span>
+            <div id="registered-gears" class="value"></div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+<div class="info-card">
+  <div class="card-header">Registered Status:</div>
+
+  <div class="info-item">
+    <i class="bi bi-boat"></i>
+    <div>
+      <span class="label">Registered Vessels:</span>
+      <span class="value" id="total-vessels">0</span>
+    </div>
+  </div>
+
+    <div class="info-item">
+        <i class="bi bi-clock-history"></i>
+        <div>
+        <span class="label">Open for Renewal:</span>
+        <span class="value" id="renewable-vessels">0</span>
+        </div>
+    </div>
+    <div class="card-header">Apprehension Status:</div>
+    <div class="info-item">
+        <i class="bi bi-clock-history"></i>
+        <div>
+        <span class="label">Released Apprehended Vessels:</span>
+        <span class="value" id="releasedVessels">0</span>
+        </div>
+    </div>
+
+  <div class="card-footer-handle">⚙</div>
+</div>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="settings-page">
+      <!-- Add New Admin Account -->
+
+      <div class="card-table">
+        <h2 style="margin:0 0 8px;font-size:16px">Add New Admin Account</h2>
+
+        <form id="newAdminForm">
+          <div class="grid">
+            <div>
+              <label for="first_name">First Name</label>
+              <input id="first_name" name="first_name" type="text" required />
+            </div>
+                        <div>
+              <label for="middle_name">Middle Name</label>
+              <input id="middle_name" name="middle_name" type="text" />
+            </div>
+            <div>
+              <label for="extra_name">Extra Name</label>
+              <input id="extra_name" name="extra_name" type="text" />
+            </div>
+            <div>
+              <label for="last_name">Last Name</label>
+              <input id="last_name" name="last_name" type="text" required />
+            </div>
+              <label>Role
+              <select id="role" name="role" class="form-select">
+                <option value=""  selected>-- Select Role --</option>
+                <option value="admin">Admin</option>
+                <option value="cashier">Cashier</option>
+              </select>
+              </label>
+            <div>
+              <label for="username">Username</label>
+              <input id="username" name="username" type="text" required />
+            </div>
+            <div>
+              <label for="adminPassword">Password</label>
+              <input id="adminPassword" name="password" type="password" minlength="8" required />
+              <div class="helper">Min 8 characters. Use a mix of letters and numbers.</div>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top:12px">
+            <div>
+              <label for="adminPasswordConfirm">Confirm Password</label>
+              <input id="adminPasswordConfirm" type="password" minlength="8" required />
+            </div>
+          </div>
+
+          <div style="margin-top:14px" class="row">
+            <button type="submit" class="btn">Create Admin</button>
+            <button type="button" id="clearAdminBtn" class="btn ghost">Clear</button>
+          </div>
+
+          <div id="adminMsg" aria-live="polite"></div>
+        </form>
+      </div>
+</div>

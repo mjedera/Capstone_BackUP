@@ -1,0 +1,103 @@
+<div class="card-table">
+  <div class="table-header">
+    <h3>Announcements</h3>
+  </div>
+    <div class="search-filter-row">
+      <div class="search-container">
+        <i class="fa fa-search search-icon"></i>
+        <input
+          type="text"
+          id="announcementSearch"
+          class="form-control"
+          placeholder="Search title..."
+        >
+      </div>
+      <div class="status-dropdown" id="announcementStatus">
+        <button type="button" class="dropdown-toggle">
+          <span id="statusLabel">ALL</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-value="ALL">ALL</li>
+          <li data-value="INACTIVE">INACTIVE</li>
+          <li data-value="CANCELLED">CANCELLED</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-primary" id="newAnnouncement" style="margin-left: auto;font-family: monospace;">
+        <i class="fa fa-plus-circle"></i> New Announcement
+      </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 vessel" style="margin-top: 20px;">
+      <thead>
+      <tr style="background-color: hsl(0, 0%, 95%); padding: 8px 6px;">
+          <th style="min-width: 150px;">Title</th>
+          <th>Message</th>
+          <th>Meeting Date</th>
+          <th>Meeting Time</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="announcementBody">
+        <tr><td colspan="7">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-wrapper" id="paginationWrapper" style="display:none">
+    <button class="btn btn-sm btn-secondary" id="prevPage">Prev</button>
+    <span class="page-indicator" id="pageIndicator"></span>
+    <button class="btn btn-sm btn-secondary" id="nextPage">Next</button>
+  </div>
+</div>
+
+<!-- Add Announcement Modal -->
+<div class="modal-overlay" id="announcementModal" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h4>Add New Announcement</h4>
+      <button class="modal-close" id="closeAnnouncementModal">&times;</button>
+    </div>
+    <div class="modal-body">
+
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="announcementTitle" class="form-control" required>
+    </div>
+
+    <div class="form-group full-width">
+        <label>Message</label>
+        <textarea
+        id="announcementMessage"
+        class="form-control"
+        rows="4"
+        required
+        ></textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+        <label>Meeting Date</label>
+        <input type="date" id="announcementDate" class="form-control">
+        </div>
+
+        <div class="form-group">
+        <label>Meeting Time</label>
+        <input type="time" id="announcementTime" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group full-width">
+        <label>Location</label>
+        <input type="text" id="announcementLocation" class="form-control">
+    </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="cancelAnnouncement">Cancel</button>
+      <button class="btn btn-primary" id="saveAnnouncement">Save Announcement</button>
+    </div>
+  </div>
+</div>

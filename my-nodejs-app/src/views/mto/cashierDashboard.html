@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/applicantTable.css">
+</head>
+<body>
+    <div id="sidebarOverlay"></div>
+    <div id="messageBox" class="message-box"></div>
+    <div id="confirmDeleteModal" class="confirm-modal">
+        <div class="confirm-box">
+            <h5 id="confirmTitle">Confirm Action</h5>
+            <p id="confirmMessage"></p>
+
+            <div class="confirm-actions">
+            <button id="confirmCancelBtn" class="btn btn-secondary">
+                Cancel
+            </button>
+            <button id="confirmOkBtn" class="btn btn-primary">
+                Confirm
+            </button>
+            </div>
+        </div>
+    </div>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <img id="navlogo" src="" alt="Logo" class="logo rounded-5">
+            <div class="brand-text">FISHERFOLKS</div>
+        </div>
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a href="#" id="getDashboard">
+                    <i class="fa fa-desktop nav-icon"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" id="getAllPending">
+                    <i class="fas fa-ship nav-icon"></i>
+                    <span class="nav-text">Pending BoatR</span>
+                </a>
+                <a href="#" id="getAllPendingGears">
+                    <i class="fas fa-tools nav-icon"></i>
+                    <span class="nav-text">Pending GearR</span>
+                </a>
+                </a>
+                <a href="#" id="getVesselRenew">
+                    <i class="fas fa-sync-alt"></i>
+                    <span class="nav-text">Vessel/Gear Renewal</span>
+                </a>
+                <a href="#" id="getVesselMod">
+                    <i class="fas fa-edit"></i>
+                    <span class="nav-text">Vessel Modifications</span>
+                </a>
+                <a href="#" id="getApprehended">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span class="nav-text">Apprehension</span>
+                </a>
+                <li>
+                    <a href="/login" >
+                        <i class="fa fa-sign-out-alt nav-icon"></i>
+                        <span class="nav-text">Logout</span>
+                    </a>
+                </li>
+            </li>
+        </ul> 
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  shadow">
+        <div class="container-fluid">
+            <button title="" type="button" id="sidebarCollapse" class="btn btn-primary btn-sm">
+                <i class="fas fa-align-left"></i>
+            </button>
+            <span class="ms-2 fw-bold ">Dashboard</span>
+        </div>
+
+    </nav>
+    
+    <div id="content">
+        <div id="applicantTableContainer"></div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/cashierDashboard.js"></script>
+    <script src="/js/cashierVesselRenewals.js"></script>
+    <script src="/js/cashierVesselModifications.js"></script>
+    <script src="/js/pendingGears.js"></script>
+    <script src="/js/pendingVessels.js"></script>
+    <script src="/js/apprehendedFisherfolk.js"></script>
+</html>

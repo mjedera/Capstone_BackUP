@@ -1,0 +1,268 @@
+/* -------------------------
+   Global Styles & Variables
+-------------------------- */
+:root {
+  --bg: #eef4ff;
+  --card-bg: #ffffff;
+  --primary: #1a73e8;
+  --primary-dark: #1558b0;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --error: #dc2626;
+  --radius: 12px;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --font: 'Inter', system-ui, sans-serif;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: linear-gradient(180deg, #dce9ff, var(--bg) 80%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* -------------------------
+   Card Layout
+-------------------------- */
+.login-page {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: var(--card-bg);
+  padding: 30px 26px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+}
+
+.login-card-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.login-card-header h1 {
+  font-size: 22px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.login-card-header p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* -------------------------
+   Form Styles
+-------------------------- */
+.login-form-row {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d6d9e3;
+  font-size: 15px;
+  background: #f9fbff;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+  outline: none;
+}
+
+/* Password toggle */
+.login-pw-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-pw-toggle {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f0f4ff;
+  border: 1px solid #d5d9e5;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.login-pw-toggle:hover {
+  background: #e2e9ff;
+}
+
+
+/* Error text */
+.login-error {
+  color: var(--error);
+  font-size: 13px;
+  min-height: 18px;
+  margin-top: 4px;
+}
+
+/* Server message */
+.login-server-message {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+/* -------------------------
+   Buttons
+-------------------------- */
+.login-btn {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.login-btn.primary {
+  background: var(--primary);
+  color: white;
+  transition: 0.25s;
+}
+
+.login-btn.primary:hover {
+  background: var(--primary-dark);
+  box-shadow: #1f2937;
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.login-btn:active {
+  transform: scale(1.05);
+}
+
+/* -------------------------
+   Responsive
+-------------------------- */
+@media (max-width: 450px) {
+  body {
+    padding: 10px;
+  }
+
+  .login-card {
+    padding: 20px;
+  }
+
+  .login-card-header h1 {
+    font-size: 20px;
+  }
+
+  input, .login-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+/* -------------------------
+   Animations
+-------------------------- */
+
+/* Card Fade + Slide In */
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.login-card {
+  animation: cardEnter 0.8s ease-out forwards;
+}
+
+/* Input glow animation on focus */
+@keyframes inputFocusGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.0);
+  }
+  100% {
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+  }
+}
+
+input:focus {
+  border-color: var(--primary);
+  animation: inputFocusGlow 0.25s forwards;
+}
+
+/* Button bounce press */
+.login-btn:active {
+  transform: scale(0.96);
+  transition: transform 0.1s;
+}
+
+
+/* -------------------------
+   Fisherfolk Animated Header
+-------------------------- */
+
+.header-illustration {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+
+.boat {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 140px;
+  transform: translateX(-50%);
+  animation: boatFloat 4s ease-in-out infinite;
+}
+
+@keyframes boatFloat {
+  0% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -8px); }
+  100% { transform: translate(-50%, 0); }
+}
+.image{
+  animation: cardEnter 0.8s ease-out forwards;
+}

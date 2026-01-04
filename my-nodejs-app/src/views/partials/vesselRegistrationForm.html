@@ -1,0 +1,151 @@
+
+  <!-- Vessel Form Card -->
+  <div class="card-table vessel-card">
+    <div class="table-header">
+      <h3>Certified Standard Admeasurement Form</h3>
+        <div class="form-actions full-width" style="display:flex; gap:10px; justify-content:flex-end; margin-left: auto;">
+        <button type="button" class="btn btn-danger" id="cancelVesselRegistrationForm">
+          Close
+        </button>
+      </div>
+    </div>
+
+      <form id="vesselForm" class="two-column-form" enctype="multipart/form-data">
+      <!-- Applicant Info -->
+      <input type="hidden" id="applicantNo" name="applicantNo" class="form-control" readonly>
+      
+      <label>Vessel No.
+        <input type="text" id="vesselNo" name="vesselNo" class="form-control" readonly>
+      </label>
+
+      <label>Date
+        <input type="date" id="registrationDate" name="registration_date" class="form-control" >
+      </label>
+
+      <label>Name of Owner
+        <input type="text" id="ownerName" name="ownerName" class="form-control" readonly>
+      </label>
+
+      <label>Home Port
+        <input type="text" id="homePort" name="homePort" class="form-control" >
+      </label>
+
+      <label>Name of Fishing Vessel
+        <input type="text" id="vesselName" name="vesselName" class="form-control" >
+      </label>
+
+      <label>Address
+        <input type="text" id="ownerAddress" name="ownerAddress" class="form-control" readonly>
+      </label>
+
+      <!-- Vessel Type -->
+      <fieldset class="full-width">
+        <legend>Vessel Type</legend>
+        <div class="checkbox-group">
+          <label>
+            <input type="radio" name="vessel_type" value="Motorized" >
+            Motorized
+          </label>
+          <label>
+            <input type="radio" name="vessel_type" value="Non-Motorized" >
+            Non-Motorized
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Dimensions -->
+      <div id="dimensionsSection" class="form-grid full-width" style="display:none;">
+      <h4 class="section-title full-width">
+        Fishing Vessel Dimensions and Tonnages
+      </h4>
+
+      <label>Color
+        <input type="text" id="vesselColor" name="vesselColor" class="form-control">
+      </label>
+
+      <div>
+        <label for="vesselPhoto" class="form-label">Vessel Photo</label>
+        <input type="file" class="form-control" id="vesselPhoto" name="vessel_photo">
+        <img id="vesselPhotoPreview" style="display:none;width:110px;height:110px;object-fit:cover;border-radius:8px;margin-top:8px;">
+      </div>
+
+      <label>Length (m)
+        <input type="number" step="0.01" id="length" name="length" class="form-control">
+      </label>
+
+      <label>Breadth (m)
+        <input type="number" step="0.01" id="breadth" name="breadth" class="form-control">
+      </label>
+
+      <label>Depth (m)
+        <input type="number" step="0.01" id="depth" name="depth" class="form-control">
+      </label>
+
+      <label>Gross Tonnage
+        <input type="number" id="grossTonnage" name="grossTonnage" class="form-control" readonly>
+      </label>
+
+      <label>Net Tonnage
+        <input type="number" id="netTonnage" name="netTonnage" class="form-control" readonly>
+      </label>
+      </div>
+
+      
+
+      <!-- Engine Info -->
+      <div id="engineSection" class="form-grid full-width" style="display:none;">
+        <h4 class="section-title full-width">
+          Particulars of Propulsion System
+        </h4>
+
+        <label>Engine Make
+          <input type="text" id="engineMake" name="engineMake" class="form-control">
+        </label>
+
+        <label>Serial Number
+          <input type="text" id="serialNumber" name="serialNumber" class="form-control">
+        </label>
+
+        <label>Horse Power
+          <input type="number" step="any" id="horsePower" name="horsePower" class="form-control">
+        </label>
+
+        <label>No. of Cylinders
+          <input type="number" id="cylinders" name="cylinders" class="form-control">
+        </label>
+
+        <div>
+          <label for="enginePhoto" class="form-label">Engine Photo</label>
+          <input type="file" class="form-control" id="enginePhoto" name="engine_photo">
+          <img id="enginePhotoPreview" style="display:none;width:110px;height:110px;object-fit:cover;border-radius:8px;margin-top:8px;">
+        </div>
+      </div>
+
+
+      <h4 class="section-title full-width">Admeasurement Officer</h4>
+
+      <label>Admeasurement Officer
+        <input type="text" id="admeasuremenOfficer" name="admeasuremenOfficer" class="form-control" required>
+      </label>
+
+      <label>Place of Inspection
+        <input type="text" id="inspectionPlace" name="inspectionPlace" class="form-control" required>
+      </label>
+
+      <label>Date of Inspection
+        <input type="date" id="inspectionDate" name="inspectionDate" class="form-control" required>
+      </label>
+
+      <h4 class="section-title full-width">Payment</h4>
+      <label>Registration Fee (₱)
+        <input type="text" id="registrationFee" name="registrationFee" class="form-control" readonly>
+      </label>
+
+      <button id="saveVesselBtn" type="submit" class="btn-primary full-width" disabled style="margin-top:15px;color: #fff;" >
+        Save
+      </button>
+
+    </form>
+  </div>
+
+

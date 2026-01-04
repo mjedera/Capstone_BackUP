@@ -1,0 +1,487 @@
+<div class="card-table">
+  <div class="table-header">
+    <h3>Registered Fishing Gears</h3>
+  </div>
+    <div class="search-filter-row">
+      <div class="search-container">
+        <i class="fa fa-search search-icon"></i>
+        <input
+          type="text"
+          id="gearSearchInput"
+          class="form-control"
+          placeholder="Search owner or gear no..."
+        >
+      </div>
+      <div class="status-dropdown" id="gearStatusDropdown">
+        <button type="button" class="dropdown-toggle">
+          <span id="statusLabel">ALL</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-value="all">ALL</li>
+          <li data-value="active">ACTIVE</li>
+          <li data-value="expired">EXPIRED</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-primary" id="printSelectedGears" style="margin-left: auto;font-family: monospace;">
+        <i class="fas fa-print"></i> Print
+      </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 vessel" style="margin-top: 20px;">
+      <thead>
+      <tr style="background-color: hsl(0, 0%, 95%); padding: 8px 6px;">
+        <th class="text-center">
+          <input type="checkbox" id="selectAllGears">
+        </th>
+          <th>Gear No</th>
+          <th>Owner</th>
+          <th>Application Date</th>
+          <th>Total Fee</th>
+          <th>Status</th>
+          <th>Registered</th>
+          <th>Expiry</th>
+        </tr>
+      </thead>
+      <tbody id="registeredGearsBody">
+        <tr><td colspan="9">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-wrapper" id="paginationWrapper" style="display:none">
+    <button class="btn btn-sm btn-secondary" id="prevPage">Prev</button>
+    <span class="page-indicator" id="pageIndicator"></span>
+    <button class="btn btn-sm btn-secondary" id="nextPage">Next</button>
+  </div>
+</div>
+
+<!-- Gear Details Modal -->
+<div class="modal fade" id="gearDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Gear Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <strong>Gear No:</strong>
+            <div id="modalGearNo"></div>
+          </div>
+
+          <div class="col-md-6">
+            <strong>Owner:</strong>
+            <div id="modalOwner"></div>
+          </div>
+
+          <div class="col-md-6">
+            <strong>Application Date:</strong>
+            <div id="modalApplicationDate"></div>
+          </div>
+
+          <div class="col-md-6">
+            <strong>Status:</strong>
+            <div id="modalStatus"></div>
+          </div>
+
+          <div class="col-md-6">
+            <strong>Registered:</strong>
+            <div id="modalRegistered"></div>
+          </div>
+
+          <div class="col-md-6">
+            <strong>Expiry:</strong>
+            <div id="modalExpiry"></div>
+          </div>
+        </div>
+
+        <hr>
+
+        <h6>Gear Items</h6>
+
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Gear Name</th>
+                <th class="text-center">Qty</th>
+                <th class="text-end">—</th>
+              </tr>
+            </thead>
+            <tbody id="modalGearItems">
+              <tr>
+                <td colspan="3" class="text-center text-muted">
+                  Loading gear items...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-end mt-3">
+            <div class="fw-bold fs-5">
+              Total Registration Fee:
+              <span class="text-primary" id="modalTotalFee">₱0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex ">
+        <button style="margin-right: auto;" class="btn btn-primary" id="printGearFromModal">
+          <i class="fas fa-print"></i> Print / PDF
+        </button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-success" id="renewGearBtn">
+          <i class="fas fa-sync-alt"></i>Renew Gear
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ========================= -->
+<!-- RENEW GEAR MODAL -->
+<!-- ========================= -->
+<div class="modal fade" id="renewGearModal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Renew Fishing Gear</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="renewGearForm" class="row g-3">
+
+          <!-- BASIC INFO -->
+          <div class="col-md-4">
+            <label class="form-label">Gear No.</label>
+            <input type="text" id="gearNo" class="form-control" readonly>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Owner Name</label>
+            <input type="text" id="ownerName" class="form-control" readonly>
+          </div>
+
+         <!-- --------------------------------------------- -->
+        <!-- HAND INSTRUMENTS -->
+        <!-- --------------------------------------------- -->
+        <h4 class="section-title full-width">Hand Instruments</h4>
+
+        <label>Speargun
+          <input type="number" id="spear_gun" name="speargun" min="0" class="form-control">  
+        </label>
+
+        <label>Scoop/Dip Nets (Bolinao, Anchovies)
+          <input type="number" id="scoop_dip_net" name="scoopNet" min="0" class="form-control">
+        </label>
+
+        <label>Gaff Hook
+          <input type="number" id="gaff_hook" name="gaffHook" min="0" class="form-control">
+        </label>
+
+        <label>Spears (Sapang)
+          <input type="number" id="spears" name="spears" min="0" class="form-control">
+        </label>
+
+        <!-- --------------------------------------------- -->
+        <!-- LINES -->
+        <!-- --------------------------------------------- -->
+        <h4 class="section-title full-width">Lines</h4>
+
+        <label>Long line (palangre) 500 hooks
+          <input type="number" id="longLine500" name="longLine500" min="0" class="form-control">
+        </label>
+
+        <label>Long line (palangre) 501 hooks+
+          <input type="number" id="longLine500plus" name="longLine500plus" min="0" class="form-control">
+        </label>
+
+        <!-- --------------------------------------------- -->
+        <!-- PALUBOG NETS -->
+        <!-- --------------------------------------------- -->
+        <h4 class="section-title full-width">Palubog Nets</h4>
+
+        <label>Pang-ilak
+          <input type="number" id="pang_ilak" name="pang_ilak" min="0" class="form-control">
+        </label>
+
+        <label>Panglonggot (Mabgas/Bolinao)
+          <input type="number" id="panglonggot" name="panglonggot" min="0" class="form-control">
+        </label>
+
+        <label>Pang-mangodlong
+          <input type="number" id="pang_mangodlong" name="pang_mangodlong" min="0" class="form-control">
+        </label>
+
+        <label>Panghawol-hawol
+          <input type="number" id="panghawol_hawol" name="panghawol_hawol" min="0" class="form-control">
+        </label>
+
+        <label>Pangmangsi
+          <input type="number" id="pangmangsi" name="pangmangsi" min="0" class="form-control">
+        </label>
+
+        <!-- --------------------------------------------- -->
+        <!-- NETS -->
+        <!-- --------------------------------------------- -->
+        <h4 class="section-title full-width">Nets</h4>
+
+        <label>Bungsod
+          <input type="number" id="bungsod" name="bungsod" min="0" class="form-control">
+        </label>
+
+        <label>Palutaw nets
+          <input type="number" id="palutawNets" name="palutawNets" min="0" class="form-control">
+        </label>
+
+        <label>Palaran
+          <input type="number" id="palaran" name="palaran" min="0" class="form-control">
+        </label>
+
+        <label>Pamawo (no scaring device)
+          <input type="number" id="pamawo" name="pamawo" min="0" class="form-control">
+        </label>
+
+        <!-- --------------------------------------------- -->
+        <!-- TRAPS / BOBO -->
+        <!-- --------------------------------------------- -->
+        <h4 class="section-title full-width">Traps</h4>
+
+        <label>Bobo Small (3ft)
+          <input type="number" name="boboSmallQty" id="boboSmallQty" min="0" class="form-control">
+        </label>
+
+        <label>Bobo (>3ft)
+          <input type="number" name="boboLargeQty" id="boboLargeQty" min="0" class="form-control">
+        </label>
+
+        <label>Tambuan
+          <input type="number" name="tambuanQty" id="tambuanQty" min="0" class="form-control">
+        </label>
+
+        <!-- Accessories -->
+        <h4 class="section-title full-width">Accessories</h4>
+          <label>Accessories
+            <select id="accessories" name="accessories" class="form-select">
+              <option value=""  selected>-- Select Accessory --</option>
+              <option value="pressure_light">Pressure light (Petromax)</option>
+              <option value="25_watts_below">25 watts below</option>
+              <option value="26_50_watts">26–50 watts</option>
+            </select>
+          </label>
+
+
+          <h4 class="section-title full-width">Payment</h4>
+          <div class="col-md-4">
+            <label class="form-label">Renewal Fee (₱)</label>
+            <input type="text" id="renewal_fee" class="form-control" readonly>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" id="submitRenewGear">
+          <i class="fas fa-sync-alt"></i> Submit Renewal
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- GEAR PRINT FORM TEMPLATE -->
+<!-- ========================= -->
+<div id="printGearForm" style="display:none">
+
+  <style>
+    @media print {
+      @page { size: A4 portrait; margin: 10mm; }
+      body { margin: 0; font-family: Arial, sans-serif; }
+    }
+
+    /* EXACT SAME STYLES AS VESSEL PRINT */
+    .print-form {
+      width: 93%;
+      box-sizing: border-box;
+      page-break-before: always;
+      page-break-after: always;
+      break-after: page;
+      transform: scale(1.07);
+      transform-origin: top left;
+    }
+
+    table.print-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .print-table td {
+      border: 1px solid #000;
+      padding: 6px;
+      vertical-align: middle;
+      word-break: break-word;
+      font-size: 12px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .label {
+      font-weight: bold;
+      width: 25%;
+    }
+
+    .section-title {
+      font-weight: bold;
+      text-align: center;
+      background: #f2f2f2;
+    }
+
+    .remarks-box {
+      height: 120px;
+      vertical-align: top;
+    }
+
+    .signature-box {
+      height: 90px;
+    }
+  </style>
+
+  <div class="print-form" id="printGearTemplate">
+
+    <!-- HEADER -->
+    <div class="center bold">
+      Republic of the Philippines<br>
+      Province of Southern Leyte<br>
+      Municipality of Anahawan<br>
+      OFFICE OF THE MUNICIPAL MAYOR
+    </div>
+
+    <br>
+
+    <table class="print-table">
+
+      <!-- TITLE + APPLICATION -->
+      <tr>
+        <td colspan="3" class="center bold">
+          CERTIFIED STANDARD GEAR REGISTRATION FORM
+        </td>
+        <td>
+          <strong>Application No.:</strong><br>
+          <span id="pgGearNo"></span><br><br>
+          <strong>Date:</strong><br>
+          <span id="pgAppDate"></span>
+        </td>
+      </tr>
+
+      <!-- OWNER / ADDRESS -->
+      <tr>
+        <td colspan="2">
+          <strong>NAME OF OWNER</strong><br>
+          <span id="pgOwner"></span>
+        </td>
+        <td colspan="2">
+          <strong>ADDRESS</strong><br>
+          <span id="pgAddress"></span>
+        </td>
+      </tr>
+
+      <!-- SECTION -->
+      <tr>
+        <td colspan="4" class="section-title">
+          FISHING GEAR DETAILS
+        </td>
+      </tr>
+
+      <!-- GEAR DETAILS (GRID STYLE LIKE VESSEL) -->
+      <tr>
+        <td class="label">Hand Instruments</td>
+        <td colspan="3" id="pgHandInstruments"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Line Type</td>
+        <td colspan="3" id="pgLineType"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Nets</td>
+        <td colspan="3" id="pgNets"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Palubog Nets</td>
+        <td colspan="3" id="pgPalubog"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Accessories</td>
+        <td colspan="3" id="pgAccessories"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Bobo (Small)</td>
+        <td colspan="3" id="pgBoboSmall"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Bobo (Large)</td>
+        <td colspan="3" id="pgBoboLarge"></td>
+      </tr>
+
+      <tr>
+        <td class="label">Tambuan</td>
+        <td colspan="3" id="pgTambuan"></td>
+      </tr>
+
+      <!-- REGISTERED / EXPIRY / FEE -->
+      <tr>
+        <td>
+          <strong>REGISTERED DATE</strong><br>
+          <span id="pgRegistered"></span>
+        </td>
+        <td>
+          <strong>EXPIRY DATE</strong><br>
+          <span id="pgExpiry"></span>
+        </td>
+        <td colspan="2">
+          <strong>TOTAL REGISTRATION FEE</strong><br>
+          <span id="pgFee"></span>
+        </td>
+      </tr>
+
+      <!-- REMARKS / SIGNATURE -->
+      <tr>
+        <td colspan="2" class="remarks-box">
+          <strong>REMARKS, FINDINGS AND RECOMMENDATIONS</strong>
+        </td>
+        <td colspan="2" class="remarks-box center">
+          <br><br>
+          <strong>Printed Name & Signature of Officer</strong>
+        </td>
+      </tr>
+
+      <!-- NOTED BY -->
+      <tr>
+        <td colspan="2" class="signature-box"></td>
+        <td colspan="2" class="center signature-box">
+          <strong>NOTED BY:</strong><br><br>
+          MAO / MA Designate
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>

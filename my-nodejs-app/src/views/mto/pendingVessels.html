@@ -1,0 +1,62 @@
+<!-- pendingGears.html -->
+<div class="card-table">
+  <div class="table-header column">
+    <div class="header-row">
+      <h3>Pending Vessel Registrations</h3>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrapper below-title">
+      <span class="search-icon material-icons">search</span>
+      <input
+        type="text"
+        id="pendingVesselSearch"
+        class="form-control search-input"
+        placeholder="Search vessel, owner, or type..."
+      />
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-middle table-hover" id="pendingVesselsTable">
+      <thead>
+        <tr style="background-color: hsl(0, 0%, 95%);">
+          <th style="min-width: 120px;">Vessel No</th>
+          <th>Vessel Name</th>
+          <th>Owner</th>
+          <th>Type</th>
+          <th>Gross Tonnage</th>
+          <th>Fee (₱)</th>
+          <th>Status</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="pendingVesselsBody"></tbody>
+    </table>
+  </div>
+  <div class="pagination-wrapper" style="display: flex;">
+    <button class="btn btn-sm btn-secondary" id="prevPage">
+      Prev
+    </button>
+    <span id="pageIndicator" class="page-indicator">
+      Page 1 of 1
+    </span>
+    <button class="btn btn-secondary btn-sm" id="nextPage">
+      Next
+    </button>
+  </div>
+
+</div>
+
+
+<!-- CONFIRM MODAL -->
+<div id="confirmDeleteModal" class="confirm-modal">
+  <div class="confirm-box">
+    <h5 id="confirmTitle">Confirm Action</h5>
+    <p id="confirmMessage"></p>
+
+    <div class="confirm-actions">
+      <button id="confirmCancelBtn" class="btn btn-secondary">Cancel</button>
+      <button id="confirmOkBtn" class="btn btn-danger">Confirm</button>
+    </div>
+  </div>
+</div>

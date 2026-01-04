@@ -1,0 +1,208 @@
+<style>
+    /* CSS for the Password Reset Fragment (using unique class prefixes) */
+
+    /* The outer container styles are now scoped to the main wrapper */
+    .pw-fragment-wrapper {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Card Container (Main Fragment Block) */
+    .pw-reset-container {
+        background-color: #fff;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-top: 4px solid #4f46e5;
+        border-radius: 1.5rem;
+        padding: 2rem;
+        width: 100%;
+        max-width: 900px; /* Increased max-width to accommodate 3 horizontal inputs */
+        transition: all 0.5s ease;
+    }
+
+    /* Hover Effect for Card */
+    .pw-reset-container:hover {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Title & Icon */
+    .pw-icon {
+        color: #4f46e5;
+        width: 2.5rem;
+        height: 2.5rem;
+        margin: 0 auto 1rem auto;
+        display: block;
+    }
+    .pw-reset-title {
+        font-size: 1.875rem;
+        font-weight: 800;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .pw-reset-subtitle {
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 0.875rem;
+    }
+
+    /* Input Fields
+    .pw-input-group {
+        /* Base styling for input groups */
+        /* Removed margin-bottom here as gap handles vertical spacing */
+    
+    */
+    .pw-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.25rem;
+    }
+    .pw-reset-input {
+        width: 100%;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.75rem;
+        color: #1f2937;
+        transition: all 0.3s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    /* Input Focus State */
+    .pw-reset-input:focus {
+        outline: none;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Submit Button Styling */
+    .pw-submit-button {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #fff;
+        
+        background-color: #4f46e5;
+        
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    /* Button Hover/Active States */
+    .pw-submit-button:hover {
+        background-color: #4338ca;
+        transform: scale(1.01);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .pw-submit-button:active {
+        transform: scale(0.99);
+    }
+
+    /* Form Layout: Column structure with gap */
+    .pw-reset-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem; /* Separates the horizontal input group from the button/title */
+    }
+    
+    /* NEW: Container for all three inputs */
+    .pw-horizontal-inputs {
+        display: flex;
+        flex-direction: column; /* Stacked by default for mobile */
+        gap: 1.5rem; /* Vertical spacing between inputs on mobile */
+    }
+
+    /* Media Query for Desktop/Larger Screens (making ALL 3 inputs horizontal) */
+    @media (min-width: 768px) {
+        .pw-horizontal-inputs {
+            flex-direction: row; /* Horizontal layout on desktop */
+            gap: 1rem; /* Horizontal spacing between inputs on desktop */
+        }
+        /* Ensure input groups inside the horizontal container take up one-third the width */
+        .pw-horizontal-inputs .pw-input-group {
+            flex: 1; /* Each input group takes equal space (1/3) */
+        }
+    }
+
+</style>
+
+<!-- Start of the main content fragment wrapper -->
+<div class="pw-fragment-wrapper">
+    <div class="pw-reset-container">
+        <!-- SVG Icon for visual appeal -->
+        <svg class="pw-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+
+        <h2 class="pw-reset-title">Secure Password Change</h2>
+        <p class="pw-reset-subtitle">Please fill out all fields to update your account security.</p>
+
+        <form id="pw-reset-form" class="pw-reset-form">
+
+            
+            <div class="pw-horizontal-inputs">
+                
+                <!-- 1. Current Password -->
+                <div class="pw-input-group">
+                    <label for="pw-current-input" class="pw-label">Current Password</label>
+                    <input
+                        type="password"
+                        id="pw-current-input"
+                        name="currentPassword"
+                        required
+                        autocomplete="current-password"
+                        placeholder="••••••••"
+                        class="pw-reset-input pw-current-input"
+                    >
+                </div>
+
+                <!-- 2. New Password -->
+                <div class="pw-input-group">
+                    <label for="pw-new-input" class="pw-label">New Password</label>
+                    <input
+                        type="password"
+                        id="pw-new-input"
+                        name="newPassword"
+                        required
+                        autocomplete="new-password"
+                        placeholder="Minimum 8 characters"
+                        class="pw-reset-input pw-new-input"
+                    >
+                </div>
+
+                <!-- 3. Confirm New Password -->
+                <div class="pw-input-group">
+                    <label for="pw-confirm-input" class="pw-label">Confirm New Password</label>
+                    <input
+                        type="password"
+                        id="pw-confirm-input"
+                        name="confirmPassword"
+                        required
+                        autocomplete="new-password"
+                        placeholder="Repeat the new password"
+                        class="pw-reset-input pw-confirm-input"
+                    >
+                </div>
+
+            </div>
+            
+            <button
+                type="submit"
+                class="pw-submit-button"
+            >
+                Change Password
+            </button>
+
+            <!-- Message Area for Validation -->
+            <div id="pw-message-area" class="pw-message-area h-4"></div>
+    </div>
+</div>

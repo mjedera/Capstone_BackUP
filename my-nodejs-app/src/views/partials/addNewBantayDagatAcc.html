@@ -1,0 +1,110 @@
+<div id="addBantayDagatModal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h3>Add New Bantay Dagat Account</h3>
+      <button type="button" class="modal-close" id="closeAddBantayModal">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <form id="newBantayDagatForm" enctype="multipart/form-data">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" id="first_name"  required>
+          </div>
+          <div class="form-group">
+            <label>Middle Name (Optional)</label>
+            <input class="form-control" id="middle_name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" id="last_name" required>
+          </div>
+          <div class="form-group">
+            <label>Extra Name</label>
+            <input class="form-control" id="extra_name" >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" class="form-control" id="age" required>
+          </div>
+          <div class="form-group">
+            <label>Sex</label>
+            <select class="form-select" id="sex" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Barangay Address</label>
+            <input class="form-control" id="addressInput" required>
+            <div id="suggestions"></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Marital Status</label>
+            <select class="form-select" id="marital_status" required>
+              <option value="">Select</option>
+              <option>Single</option>
+              <option>Married</option>
+              <option>Widowed</option>
+              <option>Divorced</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Birthday</label>
+            <input type="date" class="form-control" id="birthday" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" id="bantayUsername" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" id="bantayPassword" minlength="8" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" id="bantayPasswordConfirm" minlength="8" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Profile Photo</label>
+            <input type="file" class="form-control" id="bantay_photo" accept="image/*">
+            <img id="bantay_photo_preview"
+                 style="margin-top:10px;width:120px;height:120px;object-fit:cover;border-radius:8px;display:none;">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn">Create Account</button>
+          <button type="button" class="btn ghost" id="cancelAddBantay">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="card-table">
+    <div class="table-header column">
+        <div class="header-row">
+            <h3>Pending Vessel Renewals</h3>
+        </div>
+
+        <!-- Search + Filter Row -->
+        <div class="search-filter-row below-title">
+          <!-- Search -->
+          <div class="search-wrapper">
+            <span class="search-icon material-icons">search</span>
+            <input
+              type="text"
+              id="cashierRenewalSearch"
+              class="form-control search-input"
+              placeholder="Search vessel or owner..."
+            />
+          </div>
+
+          <!-- Dropdown -->
+          <div class="status-dropdown" id="gearVesselRenewal">
+            <button type="button" class="dropdown-toggle">
+              <span id="statusLabel">ALL</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li data-value="ALL">ALL</li>
+              <li data-value="GEARS">GEARS</li>
+              <li data-value="VESSELS">VESSELS</li>
+            </ul>
+          </div>
+        </div>
+
+    </div>
+
+
+  <div class="table-responsive">
+    <table class="table table-sm table-hover ">
+      <thead>
+        <tr style="background-color: hsl(0, 0%, 95%);">
+          <th style="min-width: 150px;">Vessel / Gear No</th>
+          <th>Owner</th>
+          <th class="text-end">Base Fee</th>
+          <th class="text-end">Penalty</th>
+          <th class="text-end">Total</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody id="cashierRenewalsBody">
+        <tr>
+          <td colspan="6" class="text-center text-muted">
+            Loading renewals...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="pagination-wrapper" style="display: flex;">
+    <button class="btn btn-sm btn-secondary" id="prevPage">
+      Prev
+    </button>
+    <span id="pageIndicator" class="page-indicator">
+      Page 1 of 1
+    </span>
+    <button class="btn btn-secondary btn-sm" id="nextPage">
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+
+  <div class="applicantCardsWrapper">
+
+    <!-- Total Applicants -->
+    <div class="applicantCardItem">
+      <h2 id="totalApplicants">0</h2>
+      <p class="applicantCardText">Total Applicants</p>
+    </div>
+
+    <!-- Male Applicants -->
+    <div class="applicantCardItem">
+      <h2 id="maleApplicants">0</h2>
+      <p class="applicantCardText">Male</p>
+    </div>
+
+    <!-- Female Applicants -->
+    <div class="applicantCardItem">
+      <h2 id="femaleApplicants">0</h2>
+      <p class="applicantCardText">Female</p>
+    </div>
+
+  </div>
+
+  <div class="applicantChartWrapper ">
+
+      <div class="yearInputsWrapper">
+          <label>From Year:
+            <input type="number" id="yearFromInput" min="2000" value="2025">
+          </label>
+          <label>To Year:
+            <input type="number" id="yearToInput" min="2000">
+          </label>
+          <button class="btn-add" id="loadChartButton">Load Chart</button>
+          <button id="printDashboardButton">Print</button>
+        </div>
+
+      <canvas id="applicantsChartCanvas"></canvas>
+  </div>
+

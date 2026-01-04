@@ -1,0 +1,502 @@
+<div class="card-table">
+  <div class="table-header">
+    <h3>Registered Fishing Vessels</h3>
+  </div>
+  <div class="search-filter-row">
+    <div class="search-container">
+      <i class="fa fa-search search-icon"></i>
+      <input
+        type="text"
+        id="vesselSearchInput"
+        class="form-control"
+        placeholder="Search vessel, owner, or vessel no..."
+      >
+    </div>
+
+    <div class="status-dropdown" id="vesselStatusDropdown">
+      <button type="button" class="dropdown-toggle">
+        <span id="statusLabel">ALL</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li data-value="all">ALL</li>
+        <li data-value="active">ACTIVE</li>
+        <li data-value="expired">EXPIRED</li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary" id="printSelectedBtn" style="margin-left: auto;font-family: monospace;">
+      <i class="fas fa-print"></i> Print
+    </button>
+</div>
+  <div class="table-responsive">
+  <table class="table table-hover mb-0 vessel" style="margin-top: 20px;">
+    <thead>
+    <tr style="background-color: hsl(0, 0%, 95%); padding: 8px 6px;">
+      <th class="text-center">
+        <input type="checkbox" id="selectAllVessels">
+      </th>
+      <th>Vessel No</th>
+      <th>Vessel Name</th>
+      <th>Owner</th>
+      <th>Type</th>
+      <th style="min-width:120px;">Gross Tonnage</th>
+      <th>Fee</th>
+      <th>Status</th>
+      <th>Registered</th>
+      <th>Expiry</th>
+    </tr>
+    </thead>
+    <tbody id="registeredVesselsBody">
+      <tr ><td colspan="10">Loading...</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="pagination-wrapper" id="paginationWrapper" style="display:none">
+    <button class="btn btn-sm btn-secondary" id="prevPage">Prev</button>
+    <span class="page-indicator" id="pageIndicator"></span>
+    <button class="btn btn-sm btn-secondary" id="nextPage">Next</button>
+  </div>
+</div>
+
+<!-- View Vessel Details Modal -->
+<div class="modal fade" id="vesselDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Vessel Registration Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="vesselDetailsBody">
+        <p class="text-muted text-center">Loading details...</p>
+      </div>
+
+      <div class="modal-footer">
+        <button style="margin-right: auto;" class="btn btn-primary" id="printVesselBtn">
+          <i class="fas fa-print"></i> Print / PDF
+        </button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-warning" id="requestVesselModification">
+          <i class="fas fa-edit"></i> Modify Vessel
+        </button>
+        <button style="display:none" class="btn btn-success" id="renewVesselBtn">
+          <i class="fas fa-sync-alt"></i> Renew Vessel
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--------------------------------------------------------------- renew vessel modal ------------------------------------------------------------>
+<div class="modal fade" id="vesselRenewModal" tabindex="-1">
+  <div class="modal-dialog modal-md modal-dialog-centered ">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Renew Vessel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form id="vesselRenewForm">
+        <div class="modal-body">
+
+          <div class="mb-2">
+            <label class="form-label">Vessel No</label>
+            <input type="text" id="renewVesselNo" class="form-control" readonly>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Current Expiry</label>
+            <input type="text" id="oldExpiry" class="form-control" readonly>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">New Expiry</label>
+            <input type="text" id="newExpiry" class="form-control" readonly>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Base Renewal Fee</label>
+            <input type="text" id="renewBaseFee" class="form-control" readonly>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Penalty</label>
+            <input type="text" id="renewPenalty" class="form-control" readonly>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Renewal Fee</label>
+            <input type="text" id="renewalFee" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success">
+            Submit Renewal
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= REQUEST VESSEL MODIFICATION MODAL ================= -->
+<div class="modal fade" id="vesselModificationModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Request Vessel Modification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form id="vesselModificationForm" enctype="multipart/form-data">
+        <div class="modal-body">
+
+          <!-- CURRENT VALUES -->
+          <h6 class="text-muted mb-2">Current Specifications</h6>
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label">Length (m)</label>
+              <input type="text" id="curLength" class="form-control" readonly>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Breadth (m)</label>
+              <input type="text" id="curBreadth" class="form-control" readonly>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Depth (m)</label>
+              <input type="text" id="curDepth" class="form-control" readonly>
+            </div>
+            <hr id="engineFieldRow">
+            <h6 id="engineFieldTitle" class="mb-2">Engine Details</h6>
+
+            <div class="row g-3 mb-3" id="engineFields">
+              <div class="col-md-6">
+                <label class="form-label">Engine Make</label>
+                <input type="text" name="new_engine_make" id="newEngineMake" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Engine Serial Number</label>
+                <input type="text" name="new_engine_serial_number" id="newEngineSerial" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Horse Power</label>
+                <input type="number" step="any" name="new_engine_horse_power" id="newEngineHP" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Cylinders</label>
+                <input type="number" step="any" name="new_engine_cylinders" id="newEngineCylinders" class="form-control">
+              </div>
+            </div>
+          </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label">New Vessel Type</label>
+                <select name="new_vessel_type" id="newVesselType" class="form-control">
+                  <option value="">— No Change —</option>
+                   <option value="Non-Motorized">Non-Motorized</option>
+                  <option value="Motorized">Motorized</option>
+                </select>
+              </div>
+            </div>
+          <!-- NEW VALUES -->
+          <hr>
+          <h6 class="mb-2">New Specifications</h6>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label">New Length (m)</label>
+              <input type="number" step="0.01" name="new_length" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">New Breadth (m)</label>
+              <input type="number" step="0.01" name="new_breadth" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">New Depth (m)</label>
+              <input type="number" step="0.01" name="new_depth" class="form-control">
+            </div>
+              <hr>
+              <h6>Computed Values (Preview)</h6>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label">Gross Tonnage</label>
+                  <input type="text" name="new_gross_tonnage" id="previewGross" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Net Tonnage</label>
+                  <input type="text" name="new_net_tonnage" id="previewNet" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Estimated Fee</label>
+                    <input type="hidden" name="modification_fee" id="modificationFeeValue">
+                    <input
+                      type="text"
+                      id="previewFee"
+                      class="form-control"
+                      readonly
+                    >
+                </div>
+              </div>
+              <hr>
+              <h6>Updated Photos</h6>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">New Vessel Photo</label>
+                  <input type="file" name="vessel_photo" accept="image/*" class="form-control">
+                </div>
+
+                <div class="col-md-6" id="enginephotodiv">
+                  <label class="form-label">New Engine Photo</label>
+                  <input type="file" name="engine_photo" accept="image/*" class="form-control">
+                </div>
+              </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Reason for Modification</label>
+            <textarea name="reason" class="form-control" rows="3" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-warning">
+            Submit Modification Request
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <style>
+  #vesselModificationModal .modal-body {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+</style>
+
+</div>
+
+
+<!-- ================= PRINT VESSEL FORM ================= -->
+<div id="printVesselForm" style="display:none">
+  <style>
+    @media print {
+      /* Hide everything by default */
+      body > * {
+        color: #000;
+        display: none !important;
+      }
+
+      /* Show only the print form */
+      #printVesselForm {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Remove margins added by browser */
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+
+
+      body {
+        margin: 0 !important;
+        background: #fff !important;
+      }
+    }
+    .print-form {
+      width: 93%;
+      box-sizing: border-box;
+      page-break-before: always;
+      transform: scale(1.07);
+      transform-origin: top left;
+
+    }
+    .print-header {
+      text-align: center;
+      font-weight: bold;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .print-title {
+      background: #ff4fa3;
+      color: #000;
+      padding: 6px;
+      font-weight: bold;
+      text-align: center;
+      border: 1px solid #000;
+    }
+
+    table.print-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .print-table td {
+      border: 1px solid #000;
+      padding: 6px;
+      vertical-align: middle;
+    }
+    .print-table td {
+      word-break: break-word;
+    }
+
+
+    .label {
+      font-weight: bold;
+      width: 25%;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .checkbox {
+      border: 1px solid #000;
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .signature {
+      height: 40px;
+    }
+  </style>
+
+  <div class="print-form" id="printTemplate">
+
+    <div class="print-header">
+      Republic of the Philippines<br>
+      Province of Southern Leyte<br>
+      Municipality of Anahawan<br>
+      <strong>OFFICE OF THE MUNICIPAL MAYOR</strong>
+    </div>
+
+    <table class="print-table">
+      <tr>
+        <td colspan="3" class="print-title">
+          CERTIFIED STANDARD ADMEASUREMENT FORM
+        </td>
+        <td>
+          Application No.: <span id="pAppNo"></span><br>
+          Date: <span id="pDate"></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <strong>NAME OF OWNER</strong><br>
+          <span id="pOwner"></span>
+        </td>
+        <td colspan="2">
+          <strong>ADDRESS</strong><br>
+          <span id="pAddress"></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <strong>NAME OF FISHING VESSEL</strong><br>
+          <span id="pVesselName"></span>
+        </td>
+        <td>
+          <strong>COLOR</strong><br>
+          <span id="pColor"></span>
+        </td>
+        <td>
+          <strong>VESSEL TYPE</strong><br>
+          <span id="pVesselType"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Home Port</td>
+        <td colspan="3" id="homePort"></td>
+      </tr>
+
+      <tr>
+        <td colspan="4" class="center"><strong>FISHING VESSEL DIMENSIONS AND TONNAGES</strong></td>
+      </tr>
+
+      <tr>
+        <td>Length (m)</td>
+        <td id="pLength"></td>
+        <td>Breadth (m)</td>
+        <td id="pBreadth"></td>
+      </tr>
+
+      <tr>
+        <td>Depth (m)</td>
+        <td id="pDepth"></td>
+        <td>Gross Tonnage</td>
+        <td id="pGross"></td>
+      </tr>
+
+      <tr>
+        <td>Net Tonnage</td>
+        <td colspan="3" id="pNet"></td>
+      </tr>
+
+      <tr>
+        <td colspan="4" class="center"><strong>PARTICULARS OF PROPORTION SYSTEM</strong></td>
+      </tr>
+
+      <tr>
+        <td>Engine Make</td>
+        <td id="pEngine"></td>
+        <td>Horse Power</td>
+        <td id="pHP"></td>
+      </tr>
+
+      <tr>
+        <td>Serial Number</td>
+        <td id="pSerial"></td>
+        <td>No. of Cylinders</td>
+        <td id="pCylinders"></td>
+      </tr>
+
+      <tr style="height:60px">
+        <td>Place of Inspection</td>
+        <td id="pInspectionPlace"></td>
+        <td>Date of Inspection</td>
+        <td id="pInspectionDate"></td>
+      </tr>
+
+      <tr>
+        <td colspan="2" style="height:140px; vertical-align: top;">
+          <strong>REMARKS, FINDINGS AND RECOMMENDATIONS</strong>
+        </td>
+        <td colspan="2" class="text-center" >
+          <br><br><strong style="font-size: 13px;">Printed Name & Signature of Admeasuring Officer</strong>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+        <td colspan="2" class="center signature">
+          <strong>NOTED BY:</strong><br><br>
+          MAO / MA Designate
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+

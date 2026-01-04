@@ -1,0 +1,51 @@
+<div class="card-table">
+  <div class="table-header column">
+    <div class="header-row">
+      <h3>Pending Vessel Modifications</h3>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrapper below-title">
+      <span class="search-icon material-icons">search</span>
+      <input
+        type="text"
+        id="cashierModSearch"
+        class="form-control search-input"
+        placeholder="Search vessel or owner..."
+      />
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr style="background-color: hsl(0, 0%, 95%);">
+          <th style="min-width: 130px;">Vessel No</th>
+          <th>Owner</th>
+          <th>Requested Changes</th>
+          <th class="text-end">Fee</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="cashierModificationsBody">
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            Loading vessel modifications...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-wrapper" style="display: flex;">
+    <button class="btn btn-sm btn-secondary" id="prevPage">
+      Prev
+    </button>
+    <span id="pageIndicator" class="page-indicator">
+      Page 1 of 1
+    </span>
+    <button class="btn btn-secondary btn-sm" id="nextPage">
+      Next
+    </button>
+  </div>
+</div>
